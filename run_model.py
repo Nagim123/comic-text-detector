@@ -16,4 +16,11 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
+    if args.image_dir is None:
+        raise Exception("Image directory is not set! Please provice --image_dir argument")
+    if args.output_dir is None:
+        raise Exception("Output directory is not set! Please provice --output_dir argument")
+    if args.model_path is None:
+        raise Exception("Model directory is not set! Please provice --model_path argument")
+    
     detect_text(args.image_dir, args.output_dir, args.model_path)
