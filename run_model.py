@@ -2,17 +2,18 @@ import argparse
 import torch
 from inference import model2annotations
 
-def detect_text(dir_with_images: str, output_path: str) -> None:
+def detect_text(dir_with_images: str, output_path: str, model_path: str) -> None:
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
     if device == 'cpu':
         print("YOU USE CPU DEVICE, you'll wait forever instead of 3 seconds")
-    model2annotations(r'data/comictextdetector.pt', dir_with_images, output_path, save_json=False)
+    model2annotations(model_path, dir_with_images, output_path, save_json=False)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="File to run comic-text-detector!")
     parser.add_argument("--image_dir", type=str, help="Directory with images.")
     parser.add_argument("--output_dir", type=str, help="Directory where to save result of inference.")
+    parser.add_argument("--model_path", type=str, help="Path to .pt model.")
 
     args = parser.parse_args()
 
-    detect_text(args.image_dir, args.output_dir)
+    detect_text(args.image_dir, args.output_dir, args.model_path)
