@@ -4,8 +4,6 @@ from inference import model2annotations
 
 def detect_text(dir_with_images: str, output_path: str, model_path: str) -> None:
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
-    if device == 'cpu':
-        print("YOU USE CPU DEVICE, you'll wait forever instead of 3 seconds")
     model2annotations(model_path, dir_with_images, output_path, save_json=False)
 
 if __name__ == "__main__":
